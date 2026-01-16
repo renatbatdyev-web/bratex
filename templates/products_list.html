@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Товары</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>BRATEX</h1>
+    <p>{{ 'Мужские изделия' if category=='male' else 'Женские изделия' }}</p>
+
+    {% if error %}
+        <div class="error-box">
+            {{ error }}
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">✖</span>
+        </div>
+    {% endif %}
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Поиск..." value="{{ search }}">
+    </form>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Наименование товара" required>
+        <input type="text" name="description" placeholder="Описание товара">
+        <input type="text" name="barcode" placeholder="Штрихкод">
+        <input type="text" name="qr_code" placeholder="QR код">
+        <input type="number" name="quantity" placeholder="Количество" required>
+        <input type="file" name="image">
+        <button type="submit">Добавить товар</button>
+    </form>
+
+    <div class="products-list">
+        {% for p in products %}
+            <div class="product-item" style="display:flex;align-items:center;gap:8px;padding:6px 0;">
+
+                <!-- КЛИК ПО ТОВАРУ = ПРОСМОТР -->
+                <a href="/product/{{ user }}/{{ p.id }}"
+                   style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;flex:1;">
+
+                    {% if p.image %}
+                        <img src="/static/uploads/{{ p.image }}"
+                             class="product-thumb"
+                             style="width:40px;height:40px;object-fit:cover;border-radius:6px;">
+                    {% endif %}
+
+                    <div style="line-height:1.2;">
+                        <strong>{{ p.name }}</strong>
+                        <div style="font-size:12px;">
+                            {{ p.barcode }} · Остаток: {{ p.quantity }}
+                        </div>
+                    </div>
+                </a>
+
+                <!-- РЕДАКТИРОВАТЬ -->
+                <a href="/product/{{ user }}/{{ p.id }}/edit"
+                   style="font-size:12px;text-decoration:none;">✎</a>
+
+                <!-- УДАЛИТЬ -->
+                <a href="/delete_product/{{ user }}/{{ p.id }}/{{ category }}"
+                   class="delete-btn"
+                   style="text-decoration:none;">✖</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- НАЗАД -->
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+</div>
+
+</body>
+</html>

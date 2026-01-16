@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Меню</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            background: linear-gradient(90deg, #00ffd5, #00bfa5);
+            box-shadow: 0 0 10px rgba(0, 255, 213, 0.6);
+            transition: 0.2s;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(0, 255, 213, 0.9);
+        }
+
+        .menu-btn.red {
+            background: linear-gradient(90deg, #ff3b3b, #c70000);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+        }
+
+        .menu-btn.red:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1>{{ username }}</h1>
+
+    <div class="menu-buttons">
+        <a href="/worker/warehouse" class="menu-btn">Склад</a>
+        <a href="/worker/sale" class="menu-btn">Продажа</a>
+        <a href="/logout" class="menu-btn red">Выйти</a>
+    </div>
+
+</div>
+
+</body>
+</html>

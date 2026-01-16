@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX – Админ</title>
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at center, #0a2a2a 0%, #000 60%);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .card {
+            width: 420px;
+            margin: 60px auto;
+            padding: 25px;
+            background: #000;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 255, 200, 0.6);
+        }
+        h1 { color: #00ffd5; text-align: center; }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            background: linear-gradient(135deg, #00ffd5, #00bfa5);
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .user {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        a { color: #00ffd5; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>BRATEX – Админ</h1>
+
+    <form method="post" action="/admin/create_user">
+        <input type="text" name="username" placeholder="Имя работника" required>
+        <input type="text" name="password" placeholder="Пароль работника" required>
+        <button type="submit">Создать работника</button>
+    </form>
+
+    <hr>
+
+    {% for user in users %}
+        <div class="user">
+            <a href="/admin/user/{{ user.username }}">{{ user.username }}</a>
+            <a href="/admin/delete_user/{{ user.username }}" style="color:red;">Удалить</a>
+        </div>
+    {% endfor %}
+
+    <br>
+    <a href="/logout">Выйти</a>
+</div>
+</body>
+</html>

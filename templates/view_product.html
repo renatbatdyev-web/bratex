@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточка товара</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>{{ product.name }}</h1>
+
+    {% if product.image %}
+        <img src="/static/uploads/{{ product.image }}"
+             style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+    {% endif %}
+
+    <p><strong>Описание:</strong><br>{{ product.description or "—" }}</p>
+    <p><strong>Штрихкод:</strong> {{ product.barcode }}</p>
+    <p><strong>QR код:</strong> {{ product.qr_code or "—" }}</p>
+    <p><strong>Остаток:</strong> {{ product.quantity }}</p>
+
+    <br>
+
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+</div>
+
+</body>
+</html>

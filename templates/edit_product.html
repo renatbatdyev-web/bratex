@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Редактировать товар</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>Редактировать товар</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="name" placeholder="Наименование товара" value="{{ product.name }}" required>
+
+        <input type="text" name="description" placeholder="Описание товара" value="{{ product.description or '' }}">
+
+        <input type="text" name="barcode" placeholder="Штрихкод" value="{{ product.barcode or '' }}">
+
+        <input type="text" name="qr_code" placeholder="QR код" value="{{ product.qr_code or '' }}">
+
+        <input type="number" name="quantity" placeholder="Количество" value="{{ product.quantity }}" required>
+
+        {% if product.image %}
+            <div style="text-align:center; margin:10px 0;">
+                <img src="/uploads/{{ product.image }}" style="max-width:120px; border-radius:10px;">
+            </div>
+        {% endif %}
+
+        <input type="file" name="image">
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+</div>
+
+</body>
+</html>

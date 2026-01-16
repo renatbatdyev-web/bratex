@@ -1,0 +1,69 @@
+@app.route("/worker/sale", methods=["GET", "POST"])
+def worker_sale():
+    if "user" not in session or session["user"] == "admin":
+        return redirect("/")
+
+    username = session["user"]
+    conn = get_worker_db(username)
+    c = conn.cursor()
+
+    error = None
+    success = None
+    product = None
+
+    # ================= PREVIEW (поиск / сканирование) =================
+    if request.method == "POST" and request.form.get("action") == "preview":
+        code = request.form.get("code", "").strip()
+
+        c.execute(
+            "SELECT * FROM products WHERE barcode=? OR qr_code=?",
+            (code, code)
+        )
+        product = c.fetchone()
+
+        if not product:
+            error = "Товар не найден"
+
+    # ================= SELL (продажа) =================
+    if request.method == "POST" and request.form.get("action") == "sell":
+        product_id = int(request.form.get("product_id"))
+        qty = int(request.form.get("sell_qty"))
+
+        c.execute("SELECT * FROM products WHERE id=?", (product_id,))
+        product = c.fetchone()
+
+        if not product:
+            error = "Товар не найден"
+        elif product["quantity"] < qty:
+            error = "Недостаточно товара на складе"
+        else:
+            new_qty = product["quantity"] - qty
+
+            c.execute(
+                "UPDATE products SET quantity=? WHERE id=?",
+                (new_qty, product_id)
+            )
+
+            c.execute("""
+                INSERT INTO sales_history (product_id, name, barcode, quantity, sale_time)
+                VALUES (?, ?, ?, ?, ?)
+            """, (
+                product["id"],
+                product["name"],
+                product["barcode"],
+                qty,
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            ))
+
+            conn.commit()
+            success = "Продажа выполнена"
+            product = None  # очищаем карточку после продажи
+
+    conn.close()
+
+    return render_template(
+        "sale.html",
+        error=error,
+        success=success,
+        product=product
+    )

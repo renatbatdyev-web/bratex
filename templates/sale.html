@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Продажа</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>Продажа</h1>
+
+    {% if error %}
+        <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+        <div class="success-box">{{ success }}</div>
+    {% endif %}
+
+    <!-- ===== ПОИСК / СКАН ===== -->
+    <form method="POST">
+        <input type="hidden" name="action" value="preview">
+        <input type="text" name="code" placeholder="Сканируйте или введите код" required>
+        <button type="submit">Найти товар</button>
+    </form>
+
+    {% if product %}
+        <hr>
+
+        <h3>Проверка товара</h3>
+
+        <!-- 🔗 ПРОСМОТР КАРТОЧКИ (БЕЗ РЕДАКТИРОВАНИЯ) -->
+        <div style="margin-bottom:10px;">
+            <a href="/product/{{ session['user'] }}/{{ product.id }}"
+               style="color:#00ffd5; text-decoration:none; font-weight:bold;">
+                {{ product.name }}
+            </a><br>
+            Код: {{ product.barcode }}<br>
+            Остаток: {{ product.quantity }}
+        </div>
+
+        <!-- ===== ПРОДАЖА ===== -->
+        <form method="POST">
+            <input type="hidden" name="action" value="sell">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+
+            <input type="number" name="quantity" value="1" min="1" required>
+            <button type="submit">Продать</button>
+        </form>
+    {% endif %}
+
+    <br>
+
+    <a href="/worker/sales_history" class="btn">История продаж</a>
+    <a href="/worker" class="back-btn">← Назад</a>
+
+</div>
+
+</body>
+</html>

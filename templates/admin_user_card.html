@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX – {{ user.username }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>{{ user.username }}</h1>
+    <p>Пароль: <b>{{ user.password }}</b></p>
+
+    <p>Выбор категории:</p>
+
+    <a href="/admin/user/{{ user.username }}/male" class="action-btn">Мужские изделия</a>
+    <a href="/admin/user/{{ user.username }}/female" class="action-btn">Женские изделия</a>
+
+    <!-- КНОПКА НАЗАД ПЕРЕНЕСЕНА ВНИЗ -->
+    <div style="margin-top: 30px;">
+        <a href="/admin_workers_panel" class="back-btn">← Назад</a>
+    </div>
+</div>
+
+</body>
+</html>
+

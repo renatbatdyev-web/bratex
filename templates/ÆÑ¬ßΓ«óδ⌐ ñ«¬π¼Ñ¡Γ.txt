@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Склад</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>{{ username }}</h1>
+
+    <a href="/worker/male" class="menu-btn">Мужские изделия</a>
+    <a href="/worker/female" class="menu-btn">Женские изделия</a>
+    <a href="/worker" class="menu-btn exit-btn">← Назад</a>
+</div>
+
+</body>
+</html>

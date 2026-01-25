@@ -1,0 +1,212 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, #0a2a2a 0%, #000 60%);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 360px;
+    margin: 80px auto;
+    padding: 25px;
+    background: #000;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.6);
+}
+
+h1 {
+    color: #00ffd5;
+    margin-bottom: 10px;
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: #00ffd5;
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+td, th {
+    padding: 6px;
+    text-align: left;
+}
+
+.truncate {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ========== КРАСИВЫЕ КНОПКИ ========== */
+
+.action-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    margin: 6px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #00ffd5, #00bfa5);
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(0, 255, 213, 0.6);
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #00bfa5, #00ffd5);
+    box-shadow: 0 0 18px rgba(0, 255, 213, 0.9);
+    transform: scale(1.05);
+    color: #000;
+}
+
+.action-btn.red {
+    background: linear-gradient(135deg, #ff4d4d, #ff0000);
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+    color: #fff;
+}
+
+.action-btn.red:hover {
+    background: linear-gradient(135deg, #ff0000, #ff4d4d);
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
+}
+
+/* ========== ОШИБКА (красная, как ты просил) ========== */
+
+.error-box {
+    background: #ff2b2b;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    font-weight: bold;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ========== СПИСОК ТОВАРОВ + ПРОКРУТКА ========== */
+
+.products-list {
+    max-height: 280px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-right: 5px;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 255, 213, 0.2);
+}
+
+.product-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #00ffd5;
+    flex-grow: 1;
+}
+
+.product-link:hover {
+    text-decoration: underline;
+}
+
+.product-thumb {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #00ffd5;
+}
+
+.delete-btn {
+    color: red;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* ========== НАЗАД ========== */
+
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    color: #00ffd5;
+    text-decoration: none;
+}
+.products-list {
+    max-height: 210px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.product-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ffd5;
+    text-decoration: none;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.error-box {
+    background: #ff2a2a;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}

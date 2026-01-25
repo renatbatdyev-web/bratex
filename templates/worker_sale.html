@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Продажа</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>Продажа</h1>
+
+    {% if error %}
+        <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+        <div class="success-box">{{ success }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="code" placeholder="Сканируйте или введите код" required>
+        <input type="number" name="sell_qty" placeholder="Количество" required>
+        <button type="submit">Продать</button>
+    </form>
+
+    {% if product %}
+        <div style="margin-top:15px;">
+            <strong>{{ product.name }}</strong><br>
+            Код: {{ product.barcode }}<br>
+            Остаток: {{ product.quantity }}
+        </div>
+    {% endif %}
+
+    <a href="/worker" class="back-btn">← Назад</a>
+
+</div>
+
+</body>
+</html>

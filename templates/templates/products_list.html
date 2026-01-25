@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Товары</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        .menu-btn {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 14px 0;
+            background: #00f2c3;
+            color: #000;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 242, 195, 0.6);
+            transition: 0.2s;
+        }
+
+        .menu-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 195, 1);
+            transform: scale(1.03);
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <h1>BRATEX</h1>
+    <p>{{ 'Мужские изделия' if category=='male' else 'Женские изделия' }}</p>
+
+    {% if error %}
+        <div class="error-box">
+            {{ error }}
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">✖</span>
+        </div>
+    {% endif %}
+
+    <!-- ✅ КНОПКА ТАБЛИЦА (ВИДНА ВСЕМ) -->
+    <a href="/worker/{{ category }}/table?user={{ user }}" class="menu-btn">
+        Таблица
+    </a>
+
+    <!-- ПОИСК -->
+    <form method="GET">
+        <input type="text" name="search" placeholder="Поиск..." value="{{ search }}">
+    </form>
+
+    <!-- ✅ ТОЛЬКО ДЛЯ АДМИНА: ДОБАВЛЕНИЕ -->
+    {% if is_admin %}
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Наименование товара" required>
+        <input type="text" name="description" placeholder="Описание товара">
+        <input type="text" name="barcode" placeholder="Штрихкод">
+        <input type="text" name="qr_code" placeholder="QR код">
+        <input type="number" name="quantity" placeholder="Количество" required>
+<input type="text" name="size" placeholder="Размер" required>
+<input type="text" name="height" placeholder="Рост" required>
+        <input type="file" name="image">
+        <button type="submit">Добавить товар</button>
+    </form>
+    {% endif %}
+
+    <!-- СПИСОК ТОВАРОВ -->
+    <div class="products-list">
+        {% for p in products %}
+            <div class="product-item" style="display:flex;align-items:center;gap:8px;padding:6px 0;">
+
+                <a href="/product/{{ user }}/{{ p.id }}"
+                   style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;flex:1;">
+
+                    {% if p.image %}
+                        <img src="/static/uploads/{{ p.image }}"
+                             style="width:40px;height:40px;object-fit:cover;border-radius:6px;">
+                    {% endif %}
+
+                    <div style="line-height:1.2;">
+                        <strong>{{ p.name }}</strong>
+                        <div style="font-size:12px;">
+                            {{ p.barcode }} · Остаток: {{ p.quantity }}
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ✅ ТОЛЬКО АДМИН -->
+                {% if is_admin %}
+                    <a href="/product/{{ user }}/{{ p.id }}/edit"
+                       style="font-size:12px;text-decoration:none;">✎</a>
+
+                    <a href="/delete_product/{{ user }}/{{ p.id }}/{{ category }}"
+                       style="text-decoration:none;color:red;">✖</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- НАЗАД -->
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+
+</div>
+
+</body>
+</html>

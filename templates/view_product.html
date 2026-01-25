@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BRATEX — Просмотр товара</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>Просмотр товара</h1>
+
+    <!-- Просмотр без редактирования -->
+    <form>
+
+        <input type="text" value="{{ product.name }}" readonly>
+
+        <input type="text" value="{{ product.description or '' }}" readonly>
+
+        <input type="text" value="{{ product.barcode or '' }}" readonly>
+
+        <input type="text" value="{{ product.qr_code or '' }}" readonly>
+
+        <input type="number" value="{{ product.quantity }}" readonly>
+
+        <input type="text" value="{{ product.size or '' }}" readonly>
+
+        <input type="text" value="{{ product.height or '' }}" readonly>
+
+        <!-- Фото товара -->
+        {% if product.image %}
+            <div style="text-align:center; margin:15px 0;">
+                <img src="/static/uploads/{{ product.image }}" style="max-width:160px; border-radius:12px;">
+            </div>
+        {% endif %}
+
+    </form>
+
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+</div>
+
+</body>
+</html>

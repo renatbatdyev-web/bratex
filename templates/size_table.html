@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            width: 900px;
+            padding: 25px;
+            background: #050505;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 242, 195, 0.6);
+            box-shadow: 0 0 40px rgba(0, 242, 195, 0.4);
+            text-align: center;
+        }
+        h1 {
+            color: #00f2c3;
+            text-shadow: 0 0 12px rgba(0, 242, 195, 0.9);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            border: 1px solid rgba(0, 242, 195, 0.4);
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+        th {
+            background: rgba(0, 242, 195, 0.15);
+            color: #00f2c3;
+        }
+        .print-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #00f2c3;
+            color: black;
+            font-weight: bold;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 242, 195, 0.6);
+        }
+        .print-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 195, 1);
+        }
+
+        @media print {
+            table, th, td {
+                border-collapse: collapse !important;
+                border: 1px solid black !important;
+                color: black !important;
+                background: white !important;
+            }
+            th {
+                font-weight: bold !important;
+            }
+
+            .print-btn, .back-btn { display: none !important; }
+            body { background: white !important; }
+            .card { box-shadow: none !important; border: none !important; }
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #00f2c3;
+            color: black;
+            font-weight: bold;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 242, 195, 0.6);
+        }
+        .back-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 195, 1);
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>{{ title }}</h1>
+    <button onclick="window.print()" class="print-btn">🖨 Печать</button>
+    <table>
+        <tr>
+            <th>Рост/Размер</th>
+            <th>152</th><th>158</th><th>164</th><th>170</th>
+            <th>176</th><th>182</th><th>188</th><th>194</th><th>200</th>
+        </tr>
+        {% for size in [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80] %}
+        <tr>
+            <td>{{ size }}</td>
+            <td>{{ data.get((size|string,'152'), data.get((size|string,152), '')) }}</td><td>{{ data.get((size|string,'158'), data.get((size|string,158), '')) }}</td><td>{{ data.get((size|string,'164'), data.get((size|string,164), '')) }}</td><td>{{ data.get((size|string,'170'), data.get((size|string,170), '')) }}</td><td>{{ data.get((size|string,'176'), data.get((size|string,176), '')) }}</td>
+            <td>{{ data.get((size|string,'182'), data.get((size|string,182), '')) }}</td><td>{{ data.get((size|string,'188'), data.get((size|string,188), '')) }}</td><td>{{ data.get((size|string,'194'), data.get((size|string,194), '')) }}</td><td>{{ data.get((size|string,'200'), data.get((size|string,200), '')) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="javascript:history.back()" class="back-btn">← Назад</a>
+</div>
+</body>
+</html>
